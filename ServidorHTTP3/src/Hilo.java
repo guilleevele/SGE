@@ -39,25 +39,26 @@ public class Hilo extends Thread {
         String peticion;
         peticion = read.readLine();
         peticion = peticion.replaceAll(" ", "");
+        Date date = new Date();
 
         // Leer la solicitud del cliente
         if (peticion.startsWith("GET")) {
             // Construir la respuesta HTTP
-            StringBuilder respuesta = new StringBuilder();
-            respuesta.append("HTTP/1.1 200 OK\r\n");
-            respuesta.append("Content-Type: text/html;charset=UTF-8\r\n\r\n");
-            respuesta.append("<html><body>");
-            respuesta.append("<h1>La fecha y hora de Guillermo Torregrosa</h1>");
-            respuesta.append("<p>");
-            respuesta.append("Fecha y hora del servidor: ").append(new Date());
-            respuesta.append("</p>");
-            respuesta.append("</body></html>");
+            print.println("HTTP/1.1 200 OK");
+                print.println("Content-Type:text/html;charset=UTF-8");
+                print.println("Content-Length: 200");
+                print.println("\n");
+                print.println("<!DOCTYPE html>");
+                print.println("<html>");
+                print.println("<head>");
+                print.println("<title>Fecha y hora</title>");
+                print.println("</head>");
+                print.println("<body>");
+                print.println("<h1>Fecha y hora de Guillermo Torregrosa:</h1>");
+                print.println("<p>" + date + "</p>");
+                print.println("</body>");
+                print.println("</html>");        }
 
-            // Enviar la respuesta al cliente
-            print.println(respuesta.toString());
-        }
-
-        // Cerrar los streams y el socket del cliente
         read.close();
         print.close();
     }
